@@ -43,6 +43,10 @@ public class AccountInitializing implements InitializingBean {
         }
     }
 
+    /**
+     *  In real project  remove this.
+     *  in service to add real user to register
+     */
     private void addTwoUser(){
         try{
             UserVO userVO = new UserVO();
