@@ -44,18 +44,38 @@ public class AccountInitializing implements InitializingBean {
     }
 
     private void addTwoUser(){
-        UserVO userVO = new UserVO();
-        userVO.setName("user_1");
-        userVO.setPassword("123456");
-        userVO.setLogin("user_1");
-        userVO.setRoles(Arrays.asList(RolesEnum.USER));
-        UserVO save = userService.addUser(userVO);
+        try{
+            UserVO userVO = new UserVO();
+            userVO.setName("user_1");
+            userVO.setPassword("123456");
+            userVO.setLogin("user_1");
+            userVO.setRoles(Arrays.asList(RolesEnum.USER));
+            UserVO save = userService.addUser(userVO);
 
-        userVO = new UserVO();
-        userVO.setName("user_2");
-        userVO.setPassword("123456");
-        userVO.setLogin("user_2");
-        userVO.setRoles(Arrays.asList(RolesEnum.USER));
-        userService.addUser(userVO);
+
+        }catch (RuntimeException e){
+            if(!e.getMessage().equals("Can not register repeatly")){
+                throw e;
+            }else {
+                log.debug("already init, ignore this runtime exception");
+            }
+        }
+        try{
+            UserVO userVO = new UserVO();
+            userVO.setName("user_2");
+            userVO.setPassword("123456");
+            userVO.setLogin("user_2");
+            userVO.setRoles(Arrays.asList(RolesEnum.USER));
+            userService.addUser(userVO);
+
+
+        }catch (RuntimeException e){
+            if(!e.getMessage().equals("Can not register repeatly")){
+                throw e;
+            }else {
+                log.debug("already init, ignore this runtime exception");
+            }
+        }
+
     }
 }
