@@ -1,4 +1,4 @@
-package com.haifeng.demo;
+package com.haifeng.demo.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,8 +23,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .antMatchers("/order/**").authenticated();//配置order访问控制，必须认证过后才可以访问
 
 
-        http.authorizeRequests().antMatchers("/api/admin").hasRole("ADMIN");
-        http.authorizeRequests().antMatchers("/api/staff").hasRole("STAFF");
-        http.authorizeRequests().antMatchers("/api/client").access("#oauth2.hasScope('trust')");
+//        http.authorizeRequests().antMatchers("/api/admin").hasRole("ADMIN");
+//        http.authorizeRequests().antMatchers("/api/staff").hasRole("STAFF");
+//        http.authorizeRequests().antMatchers("/api/client").access("#oauth2.hasScope('trust')");
     }
 }
