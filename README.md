@@ -4,3 +4,6 @@
 
 Need to run in local:
 1. startup redis db local with default port 6379
+2. mysql   
+CREATE SCHEMA `account` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ;
+
