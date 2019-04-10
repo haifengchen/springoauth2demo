@@ -23,9 +23,6 @@ public class AccountInitializing implements InitializingBean {
     }
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
     private UserService userService;
 
     private void initAdmins(){
@@ -33,7 +30,7 @@ public class AccountInitializing implements InitializingBean {
 
         UserVO userVO = new UserVO();
         userVO.setName("admin");
-        userVO.setPassword(passwordEncoder.encode("haifeng"));
+        userVO.setPassword("haifeng");
         userVO.setLogin("admin");
         userVO.setRoles(Arrays.asList(RolesEnum.ADMIN));
         userService.addUser(userVO);

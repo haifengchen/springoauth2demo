@@ -7,6 +7,7 @@ import com.haifeng.account.service.UserService;
 import com.haifeng.account.service.vo.UserVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,10 +36,15 @@ public class UserServiceImpl implements UserService {
         User one = new User();
         BeanUtils.copyProperties(userVO, one);
         one.setRoles(new HashSet<>(userVO.getRoles()));
+        one.setPassword(passwordEncoder.encode(one.getPassword()));
         User save = userRepository.save(one);
 
         return getVO(save);
     }
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     @Override
     public UserVO findOne(String id) {
