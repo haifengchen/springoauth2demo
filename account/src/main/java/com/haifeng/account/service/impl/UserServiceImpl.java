@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
         }
         User one = new User();
         BeanUtils.copyProperties(userVO, one);
-        one.setRoles(new HashSet<>(userVO.getRoles()));
+        one.setRole(userVO.getRole());
         one.setPassword(passwordEncoder.encode(one.getPassword()));
         User save = userRepository.save(one);
 
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
         List<UserVO> collect = users.stream().map(user -> {
             UserVO userVO = new UserVO();
             BeanUtils.copyProperties(user, userVO,"password");
-            userVO.setRoles(new ArrayList<>(user.getRoles()));
+            userVO.setRole(user.getRole());
             return userVO;
         }).collect(Collectors.toList());
         return collect;
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
         if(user == null) return null;
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(user, userVO,"password");
-        userVO.setRoles(new ArrayList<>(user.getRoles()));
+        userVO.setRole(user.getRole());
         return userVO;
     }
 }

@@ -32,7 +32,7 @@ public class AccountInitializing implements InitializingBean {
         userVO.setName("admin");
         userVO.setPassword("haifeng");
         userVO.setLogin("admin");
-        userVO.setRoles(Arrays.asList(RolesEnum.ADMIN));
+        userVO.setRole(RolesEnum.ADMIN);
         userService.addUser(userVO);
         }catch (RuntimeException e){
             if(!e.getMessage().equals("Can not register repeatly")){
@@ -53,7 +53,7 @@ public class AccountInitializing implements InitializingBean {
             userVO.setName("user_1");
             userVO.setPassword("123456");
             userVO.setLogin("user_1");
-            userVO.setRoles(Arrays.asList(RolesEnum.USER));
+            userVO.setRole(RolesEnum.USER);
             UserVO save = userService.addUser(userVO);
 
 

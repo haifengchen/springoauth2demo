@@ -4,6 +4,7 @@ import com.haifeng.account.model.RolesEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.management.relation.Role;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +16,7 @@ public class UserVO extends BaseEntityVO{
     private String name;
     private String login;
     private String password;
-    private List<RolesEnum> roles;
+//    private List<RolesEnum> roles;
+    private RolesEnum role;
 
 }

@@ -16,9 +16,11 @@ public class User extends  BaseEntity{
     @NotEmpty
     private String password;
 
-    @ElementCollection(targetClass = RolesEnum.class, fetch = FetchType.EAGER)
+//    @ElementCollection(targetClass = RolesEnum.class, fetch = FetchType.EAGER)
+//    @Enumerated(EnumType.STRING)
+//    private Set<RolesEnum> roles = new HashSet<RolesEnum>();
     @Enumerated(EnumType.STRING)
-    private Set<RolesEnum> roles = new HashSet<RolesEnum>();
+    private RolesEnum role;
 
     public User(){
         super();
@@ -30,7 +32,7 @@ public class User extends  BaseEntity{
         this.name = user.getName();
         this.login = user.getLogin();
         this.password = user.getPassword();
-        this.roles = user.getRoles();
+        this.role = user.getRole();
     }
 
     public String getName() {
@@ -57,11 +59,11 @@ public class User extends  BaseEntity{
         this.password = password;
     }
 
-    public Set<RolesEnum> getRoles() {
-        return roles;
+    public RolesEnum getRole() {
+        return role;
     }
 
-    public void setRoles(Set<RolesEnum> roles) {
-        this.roles = roles;
+    public void setRole(RolesEnum role) {
+        this.role = role;
     }
 }

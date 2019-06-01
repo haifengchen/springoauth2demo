@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,7 +41,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
-            List<GrantedAuthority> collect = getRoles().stream().map(
+            /*List<GrantedAuthority> collect = getRoles().stream().map(
                     rolesEnum -> {
                         return new GrantedAuthority() {
                             @Override
@@ -49,7 +50,14 @@ public class CustomUserDetailsService implements UserDetailsService {
                             }
                         };
                     }
-            ).collect(Collectors.toList());
+            ).collect(Collectors.toList());*/
+            List<GrantedAuthority> collect = new ArrayList<>();
+            collect.add(new GrantedAuthority() {
+                @Override
+                public String getAuthority() {
+                    return getRole().getName();
+                }
+            });
             return collect;
         }
 
