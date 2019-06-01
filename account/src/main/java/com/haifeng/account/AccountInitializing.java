@@ -19,7 +19,7 @@ public class AccountInitializing implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         initAdmins();
-        addTwoUser();
+//        addTwoUser();
     }
 
     @Autowired
@@ -64,7 +64,7 @@ public class AccountInitializing implements InitializingBean {
                 log.debug("already init, ignore this runtime exception");
             }
         }
-        try{
+        /*try{
             UserVO userVO = new UserVO();
             userVO.setName("user_2");
             userVO.setPassword("123456");
@@ -79,7 +79,7 @@ public class AccountInitializing implements InitializingBean {
             }else {
                 log.debug("already init, ignore this runtime exception");
             }
-        }
+        }*/
 
     }
 }
