@@ -1,6 +1,7 @@
 package com.haifeng.oauthserver.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.http.HttpMethod;
@@ -15,7 +16,11 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class OAuth2ServerConfig {
@@ -43,6 +48,9 @@ public class OAuth2ServerConfig {
     @Configuration
     @EnableAuthorizationServer
     protected static class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
+
+        @Autowired
+        private DataSource jdbcDataSource;
 
         @Autowired
         AuthenticationManager authenticationManager;
@@ -77,7 +85,8 @@ public class OAuth2ServerConfig {
         @Override
         public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
             endpoints
-                    .tokenStore(new RedisTokenStore(redisConnectionFactory))
+//                    .tokenStore(new RedisTokenStore(redisConnectionFactory))
+                    .tokenStore(tokenStore())
                     .authenticationManager(authenticationManager)
                     .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
         }
@@ -89,6 +98,13 @@ public class OAuth2ServerConfig {
 //            oauthServer.checkTokenAccess("permitAll()");
             oauthServer.allowFormAuthenticationForClients()
                     .checkTokenAccess("permitAll()");
+        }
+
+
+        @Bean
+        public TokenStore tokenStore() {
+            return new JdbcTokenStore(jdbcDataSource);
+            //return new InMemoryTokenStore();
         }
     }
 }
