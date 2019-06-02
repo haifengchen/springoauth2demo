@@ -1,0 +1,37 @@
+zuul:
+  host:
+      socket-timeout-millis: 30000
+  routes:
+    authorized:
+      path: /oauth/**
+      url:  http://localhost:7080/oauth
+    order:
+      path: /order/**
+      url:  http://localhost:7080/order
+    account:
+      path: /account/**
+      url: http://localhost:5080/account
+    test:
+      path: /test/**
+      url: http://localhost:5080/test
+    demo:
+      path: /svae/**
+      url: http://localhost:6080/
+
+
+logging:
+  level:
+    org.springframework.cloud.netflix.zuul.EnableZuulProxy: DEBUG
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+
