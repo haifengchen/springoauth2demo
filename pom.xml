@@ -12,6 +12,7 @@
     <module>oauthserver</module>
     <module>account</module>
     <module>demo</module>
+    <module>gateway</module>
   </modules>
 
   <name>haifengdemo</name>
